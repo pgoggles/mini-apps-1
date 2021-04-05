@@ -29,12 +29,17 @@ var drawGrid = function () {
 var handlePlayEvent = function (x, y) {
   /* Determining Current Player */
   currentPlayer = playCount % 2 === 0 ? 'X' : 'O';
-
   /* Determining Box Clicked */
   var coordinates = findNearestBox(x, y);
-  canvasDraw.font = '48px serif';
-  canvasDraw.fillText(currentPlayer, (coordinates.x + 1) * gridLength - gridLength / 2, (coordinates.y + 1) * gridLength - gridLength / 2);
-  playCount ++;
+  if (gameBoard[coordinates.x][coordinates.y] === null) {
+    gameBoard[coordinates.x][coordinates.y] = currentPlayer;
+    canvasDraw.font = '48px serif';
+    canvasDraw.fillText(currentPlayer, (coordinates.x + 1) * gridLength - gridLength / 2, (coordinates.y + 1) * gridLength - gridLength / 2);
+    playCount ++;
+  } else {
+    alert ('This box has already been played in, please select another box.');
+  }
+
 };
 
 var findNearestBox = function (x, y) {
