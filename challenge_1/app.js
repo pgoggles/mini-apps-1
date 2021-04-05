@@ -1,4 +1,5 @@
 const canvas = document.getElementById('canvas');
+const reset = document.getElementById('reset');
 const canvasDraw = canvas.getContext('2d');
 var playCount = 0;
 var totalLength = canvas.height;
@@ -96,9 +97,16 @@ var checkWin = function () {
   return 'No Winner';
 };
 
+/* Handle Reset Button*/
+reset.addEventListener('click', event => {
+  init();
+});
 
 var init = function () {
+  canvasDraw.clearRect(0, 0, canvas.width, canvas.height);
   drawGrid();
+  playCount = 0;
+  gameBoard = [[null, null, null], [null, null, null], [null, null, null]];
 };
 
 init();
