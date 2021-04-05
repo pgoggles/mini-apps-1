@@ -33,8 +33,7 @@ var handlePlayEvent = function (x, y) {
   /* Determining Box Clicked */
   var coordinates = findNearestBox(x, y);
   canvasDraw.font = '48px serif';
-  canvasDraw.fillText(currentPlayer, x, y);
-  console.log('Player ', currentPlayer);
+  canvasDraw.fillText(currentPlayer, (coordinates.x + 1) * gridLength - gridLength / 2, (coordinates.y + 1) * gridLength - gridLength / 2);
   playCount ++;
 };
 
@@ -51,8 +50,7 @@ var findNearestBox = function (x, y) {
       yCoordinate ++;
     }
   }
-  var coordinates = [xCoordinate, yCoordinate];
-  console.log(coordinates);
+  var coordinates = {x: xCoordinate, y: yCoordinate};
   return coordinates;
 };
 /* Handle Click Event on Grid */
