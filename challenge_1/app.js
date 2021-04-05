@@ -1,9 +1,9 @@
 const canvas = document.getElementById('canvas');
+const canvasDraw = canvas.getContext('2d');
 var playCount = 0;
 
 var drawGrid = function () {
   /* Initialize any needed variables */
-  const canvasDraw = canvas.getContext('2d');
   var height = canvas.height;
   var width = canvas.width;
 
@@ -27,6 +27,8 @@ var drawGrid = function () {
 /* Handle Play Event */
 var handlePlayEvent = function (x, y) {
   currentPlayer = playCount % 2 === 0 ? 'X' : 'O';
+  canvasDraw.font = '48px serif';
+  canvasDraw.fillText(currentPlayer, x, y);
   console.log('Player ', currentPlayer);
   playCount ++;
 };
