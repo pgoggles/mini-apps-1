@@ -48,7 +48,7 @@ var handlePlayEvent = function (x, y) {
       var winString = winner + ' has won the game!';
       setTimeout(alert.bind(this, winString), 100);
     } else if (playCount === 9) {
-      alert ('Tie!');
+      setTimeout(alert.bind(this, 'Tie!'), 100);
     }
   }
 };
