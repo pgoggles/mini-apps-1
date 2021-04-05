@@ -1,6 +1,8 @@
+const canvas = document.getElementById('canvas');
+var playCount = 0;
+
 var drawGrid = function () {
   /* Initialize any needed variables */
-  const canvas = document.getElementById('canvas');
   const canvasDraw = canvas.getContext('2d');
   var height = canvas.height;
   var width = canvas.width;
@@ -21,6 +23,18 @@ var drawGrid = function () {
     canvasDraw.stroke();
   }
 };
+
+/* Handle Play Event */
+var handlePlayEvent = function (x, y) {
+  currentPlayer = playCount % 2 === 0 ? 'X' : 'O';
+  console.log('Player ', currentPlayer);
+  playCount ++;
+};
+
+/* Handle Click Event on Grid */
+canvas.addEventListener('click', event => {
+  handlePlayEvent(event.clientX, event.clientY);
+});
 
 var init = function () {
   drawGrid();
