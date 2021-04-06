@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const port = 3001;
 const path = require('path');
+const fs = require('fs');
 const bodyParser = require('body-parser');
 const JSONParser = require('./parser.js');
 
@@ -23,6 +24,13 @@ app.get('/app.js', (req, res) => {
 app.post('/json', (req, res) => {
   var parsedCSV = JSONParser.parser(req.body);
   res.status(200);
-  res.end(parsedCSV);
+  fs.readFile(path.join(__dirname, '../client/submission.html'), (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(data.toString().replace('<div id="CSV"></div>', '<div id="CSV">' + parsedCSV.replace(/\n/g, '<br></br>') + '</div>'));
+    }
+  });
+  // res.sendFile(path.join(__dirname, '../client/index.html'));
 });
 
