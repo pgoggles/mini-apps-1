@@ -1,0 +1,32 @@
+{
+  "name": "challenge_3",
+  "version": "1.0.0",
+  "description": "An app for checkout",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm test",
+    "build": "webpack --watch",
+    "start": "nodemon ./server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pgoggles/hr-sfo134-mini-apps-1.git"
+  },
+  "author": "Praneeth Gogineni",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pgoggles/hr-sfo134-mini-apps-1/issues"
+  },
+  "homepage": "https://github.com/pgoggles/hr-sfo134-mini-apps-1#readme",
+  "dependencies": {
+    "nodemon": "^2.0.7",
+    "webpack": "^5.31.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.14",
+    "@babel/preset-env": "^7.13.12",
+    "@babel/preset-react": "^7.13.13",
+    "babel-loader": "^8.2.2",
+    "webpack-cli": "^4.6.0"
+  }
+}
