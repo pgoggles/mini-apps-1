@@ -31,6 +31,5 @@ app.post('/json', (req, res) => {
       res.send(data.toString().replace('<div id="CSV"></div>', '<div id="CSV">' + parsedCSV.replace(/\n/g, '<br></br>') + '</div>'));
     }
   });
-  // res.sendFile(path.join(__dirname, '../client/index.html'));
 });
 
