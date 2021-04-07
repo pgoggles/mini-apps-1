@@ -5,7 +5,7 @@ class App extends React.component {
   }
 
   render() {
-    if (this.state === 0) {
+    if (this.state.currentPage === 0) {
       return (
         <div>THIS IS A TEST PAGE</div>
       );
@@ -16,3 +16,5 @@ class App extends React.component {
     }
   }
 }
+
+export default App;

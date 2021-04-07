@@ -7,8 +7,8 @@ app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, '..', 'public', 'index.html'));
 });
 
-app.get('/bundle.js', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '..', 'client', 'dist', 'bundle.js'));
+app.get('/index.js', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '..', 'public', 'index.js'));
 });
 
 app.listen(port, () => {
