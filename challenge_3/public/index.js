@@ -40,14 +40,23 @@ var App = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(App, [{
+    key: "checkoutZero",
+    value: function checkoutZero() {
+      this.setState({
+        currentPage: 1
+      });
+      console.log(this);
+    }
+  }, {
     key: "render",
     value: function render() {
       if (this.state.currentPage === 0) {
         return /*#__PURE__*/React.createElement("button", {
-          "class": "Checkout",
-          type: "button"
+          id: "Checkout",
+          type: "button",
+          onClick: this.checkoutZero.bind(this)
         }, "Checkout");
-      } else {
+      } else if (this.state.currentPage === 1) {
         return /*#__PURE__*/React.createElement("div", null, "THIS IS A SECOND TEST PAGE");
       }
     }
