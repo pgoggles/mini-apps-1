@@ -43,7 +43,10 @@ var App = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       if (this.state.currentPage === 0) {
-        return /*#__PURE__*/React.createElement("div", null, "THIS IS A TEST PAGE");
+        return /*#__PURE__*/React.createElement("button", {
+          "class": "Checkout",
+          type: "button"
+        }, "Checkout");
       } else {
         return /*#__PURE__*/React.createElement("div", null, "THIS IS A SECOND TEST PAGE");
       }

@@ -7,7 +7,7 @@ class App extends React.Component {
   render() {
     if (this.state.currentPage === 0) {
       return (
-        <div>THIS IS A TEST PAGE</div>
+        <button class="Checkout" type="button">Checkout</button>
       );
     } else {
       return (
