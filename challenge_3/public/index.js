@@ -2,6 +2,8 @@
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -34,18 +36,30 @@ var App = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      currentPage: 0
+      currentPage: 0,
+      name: null,
+      email: null,
+      password: null
     };
     return _this;
   }
 
   _createClass(App, [{
+    key: "handleChange",
+    value: function handleChange(event) {
+      this.setState(_defineProperty({}, event.target.id, event.target.value));
+    }
+  }, {
     key: "checkoutZero",
     value: function checkoutZero() {
       this.setState({
         currentPage: 1
       });
-      console.log(this);
+    }
+  }, {
+    key: "SubmitF1",
+    value: function SubmitF1() {
+      console.log(this.state);
     }
   }, {
     key: "render",
@@ -57,7 +71,35 @@ var App = /*#__PURE__*/function (_React$Component) {
           onClick: this.checkoutZero.bind(this)
         }, "Checkout");
       } else if (this.state.currentPage === 1) {
-        return /*#__PURE__*/React.createElement("div", null, "THIS IS A SECOND TEST PAGE");
+        return /*#__PURE__*/React.createElement("form", null, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+          "for": "name"
+        }, "Name: "), /*#__PURE__*/React.createElement("input", {
+          type: "text",
+          name: "name",
+          id: "name",
+          required: true,
+          onChange: this.handleChange.bind(this)
+        })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+          "for": "email"
+        }, "Email: "), /*#__PURE__*/React.createElement("input", {
+          type: "text",
+          name: "email",
+          id: "email",
+          required: true,
+          onChange: this.handleChange.bind(this)
+        })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+          "for": "password"
+        }, "Password: "), /*#__PURE__*/React.createElement("input", {
+          type: "text",
+          name: "password",
+          id: "password",
+          required: true,
+          onChange: this.handleChange.bind(this)
+        })), /*#__PURE__*/React.createElement("button", {
+          id: "SubmitF1",
+          type: "button",
+          onClick: this.SubmitF1.bind(this)
+        }, "Checkout"));
       }
     }
   }]);
