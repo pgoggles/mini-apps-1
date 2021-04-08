@@ -56,9 +56,13 @@ class App extends React.Component {
     /* For every coordinate we must check the three to the right, three to the bottom, three on each diagnoal (if they exist)*/
     if (this.state.winner === '') {
       var winner = -1;
+      var gameBoardFull = true;
       for (var i = 0; i < gameBoard.length; i++) {
         for (var j = 0; j < gameBoard.length; j++) {
           var currentPiece = gameBoard[i][j].value;
+          if (currentPiece === 0) {
+            gameBoardFull = false;
+          }
           /* Check down of the piece */
           if (i < 4 && currentPiece !== 0) {
             if (currentPiece === gameBoard[i + 1][j].value && currentPiece === gameBoard[i + 2][j].value && currentPiece === gameBoard[i + 3][j].value) {
@@ -89,6 +93,10 @@ class App extends React.Component {
         this.setState({winner: 'Red has won the game.', currentPlayerColor: ''});
       } else if (winner === 2) {
         this.setState({winner: 'Black has won the game.', currentPlayerColor: ''});
+      }
+      /* Check if Game Board is Full and No Win (i.e. Tie) */
+      if (gameBoardFull) {
+        this.setState({winner: 'Tie Game!', currentPlayerColor: ''});
       }
     }
   }
