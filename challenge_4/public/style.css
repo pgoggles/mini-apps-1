@@ -1,4 +1,22 @@
-.emptyCircle {
+.circle0 {
+  height: 25px;
+  width: 25px;
+  margin: 5px;
+  border-radius: 100%;
+  background-color: grey;
+  display: inline-block;
+}
+
+.circle1 {
+  height: 25px;
+  width: 25px;
+  margin: 5px;
+  border-radius: 100%;
+  background-color: red;
+  display: inline-block;
+}
+
+.circle2 {
   height: 25px;
   width: 25px;
   margin: 5px;
