@@ -40,7 +40,7 @@ var App = /*#__PURE__*/function (_React$Component) {
       name: '',
       email: '',
       password: '',
-      requiredF1: ''
+      requiredShow: ''
     };
     return _this;
   }
@@ -62,7 +62,18 @@ var App = /*#__PURE__*/function (_React$Component) {
     value: function SubmitF1() {
       if (this.state.name === '' || this.state.email === '' || this.state.password === '') {
         this.setState({
-          requiredF1: 'Please Fill in All Required Fields.'
+          requiredShow: 'Please Fill in All Required Fields.'
+        });
+      } else {
+        $.ajax({
+          type: 'POST',
+          url: '/form1',
+          data: {
+            name: this.state.name,
+            email: this.state.email,
+            password: this.state.password
+          },
+          success: console.log('Success')
         });
       }
     }
@@ -106,7 +117,7 @@ var App = /*#__PURE__*/function (_React$Component) {
           onClick: this.SubmitF1.bind(this)
         }, "Checkout"), /*#__PURE__*/React.createElement("div", {
           "class": "required"
-        }, this.state.requiredF1));
+        }, this.state.requiredShow));
       }
     }
   }]);

@@ -6,7 +6,7 @@ class App extends React.Component {
       name: '',
       email: '',
       password: '',
-      requiredF1: ''
+      requiredShow: ''
     };
   }
   handleChange (event) {
@@ -19,7 +19,18 @@ class App extends React.Component {
 
   SubmitF1 () {
     if (this.state.name === '' || this.state.email === '' || this.state.password === '') {
-      this.setState({requiredF1: 'Please Fill in All Required Fields.'})
+      this.setState({requiredShow: 'Please Fill in All Required Fields.'});
+    } else {
+      $.ajax({
+        type: 'POST',
+        url: '/form1',
+        data: {
+          name: this.state.name,
+          email: this.state.email,
+          password: this.state.password
+        },
+        success: console.log('Success'),
+      });
     }
   }
 
@@ -46,7 +57,7 @@ class App extends React.Component {
               required onChange={this.handleChange.bind(this)}></input>
           </div>
           <button id="SubmitF1" type="button" onClick={this.SubmitF1.bind(this)}>Checkout</button>
-          <div class="required">{this.state.requiredF1}</div>
+          <div class="required">{this.state.requiredShow}</div>
         </form>
       );
     }
