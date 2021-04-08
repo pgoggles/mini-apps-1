@@ -3,3 +3,8 @@
   padding: 5px 5px;
   color: #3861fe;
 }
+
+.required {
+  color: red;
+  size: 9px;
+}

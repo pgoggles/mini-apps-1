@@ -37,9 +37,10 @@ var App = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.state = {
       currentPage: 0,
-      name: null,
-      email: null,
-      password: null
+      name: '',
+      email: '',
+      password: '',
+      requiredF1: ''
     };
     return _this;
   }
@@ -59,7 +60,11 @@ var App = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "SubmitF1",
     value: function SubmitF1() {
-      console.log(this.state);
+      if (this.state.name === '' || this.state.email === '' || this.state.password === '') {
+        this.setState({
+          requiredF1: 'Please Fill in All Required Fields.'
+        });
+      }
     }
   }, {
     key: "render",
@@ -73,7 +78,7 @@ var App = /*#__PURE__*/function (_React$Component) {
       } else if (this.state.currentPage === 1) {
         return /*#__PURE__*/React.createElement("form", null, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
           "for": "name"
-        }, "Name: "), /*#__PURE__*/React.createElement("input", {
+        }, "Name: (Required)  "), /*#__PURE__*/React.createElement("input", {
           type: "text",
           name: "name",
           id: "name",
@@ -81,7 +86,7 @@ var App = /*#__PURE__*/function (_React$Component) {
           onChange: this.handleChange.bind(this)
         })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
           "for": "email"
-        }, "Email: "), /*#__PURE__*/React.createElement("input", {
+        }, "Email: (Required)  "), /*#__PURE__*/React.createElement("input", {
           type: "text",
           name: "email",
           id: "email",
@@ -89,8 +94,8 @@ var App = /*#__PURE__*/function (_React$Component) {
           onChange: this.handleChange.bind(this)
         })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
           "for": "password"
-        }, "Password: "), /*#__PURE__*/React.createElement("input", {
-          type: "text",
+        }, "Password: (Required)  "), /*#__PURE__*/React.createElement("input", {
+          type: "password",
           name: "password",
           id: "password",
           required: true,
@@ -99,7 +104,9 @@ var App = /*#__PURE__*/function (_React$Component) {
           id: "SubmitF1",
           type: "button",
           onClick: this.SubmitF1.bind(this)
-        }, "Checkout"));
+        }, "Checkout"), /*#__PURE__*/React.createElement("div", {
+          "class": "required"
+        }, this.state.requiredF1));
       }
     }
   }]);
