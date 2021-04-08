@@ -71,6 +71,18 @@ class App extends React.Component {
               winner = currentPiece;
             }
           }
+          /* Check major diagonal of the piece */
+          if (i < 4 && j < 4 && currentPiece !== 0) {
+            if (currentPiece === gameBoard[i + 1][j + 1].value && currentPiece === gameBoard[i + 2][j + 2].value && currentPiece === gameBoard[i + 3][j + 3].value) {
+              winner = currentPiece;
+            }
+          }
+          /* Check minor diagonal of the piece */
+          if (i > 4 && j < 4 && currentPiece !== 0) {
+            if (currentPiece === gameBoard[i - 1][j + 1].value && currentPiece === gameBoard[i - 2][j + 2].value && currentPiece === gameBoard[i - 3][j + 3].value) {
+              winner = currentPiece;
+            }
+          }
         }
       }
       if (winner === 1) {
