@@ -1,6 +1,12 @@
-ReactDOM.render(
-  <h1>Hello, world!</h1>,
-  document.getElementById('app')
-);
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render () {
+    return (
+      <h1>Hello, World!</h1>
+    );
+  }
+}
 
-var x = 5;
+export default App;
