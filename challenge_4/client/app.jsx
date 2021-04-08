@@ -9,7 +9,7 @@ class App extends React.Component {
       }
       gameBoard.push(subBoard);
     }
-    this.state = {gameBoard: gameBoard, n: props.n, currentPlayer: 1};
+    this.state = {gameBoard: gameBoard, n: props.n, currentPlayer: 1, currentPlayerColor: 'Red', rowFull: ''};
   }
 
 
@@ -21,28 +21,43 @@ class App extends React.Component {
     var gameBoard = this.state.gameBoard;
     var n = this.state.n;
     /* Traverse from the bottom row until empty */
+    var changeIndex = -1;
     for (var i = n - 1; i > -1; i--) {
       if (gameBoard[i][column].value === 0) {
-        gameBoard[i][column].value = this.state.currentPlayer;
+        changeIndex = i;
         break;
       }
     }
-    var currentPlayer = this.state.currentPlayer === 1 ? 2 : 1;
-    this.setState({gameBoard: gameBoard, currentPlayer: currentPlayer});
+    if (changeIndex > -1) {
+      gameBoard[changeIndex][column].value = this.state.currentPlayer;
+      var currentPlayer = this.state.currentPlayer === 1 ? 2 : 1;
+      var currentPlayerColor = this.state.currentPlayerColor === 'Red' ? 'Black' : 'Red';
+      this.setState({gameBoard: gameBoard, currentPlayer: currentPlayer, currentPlayerColor: currentPlayerColor, rowFull: ''});
+    } else {
+      this.setState({rowFull: 'This row column is full, please play in another column.'});
+    }
   }
 
   render () {
     return (
       <div>
-        {this.state.gameBoard.map(row => (
-          <div>
-            {row.map(gridEntry => {
-              var classString = 'circle' + gridEntry.value + ' ' + gridEntry.indices;
-              return <div class={classString} onClick={this.onClick.bind(this)}></div>;
-            }
-            )}
-          </div>
-        ))}
+        <div>
+          {this.state.gameBoard.map(row => (
+            <div>
+              {row.map(gridEntry => {
+                var classString = 'circle' + gridEntry.value + ' ' + gridEntry.indices;
+                return <div class={classString} onClick={this.onClick.bind(this)}></div>;
+              }
+              )}
+            </div>
+          ))}
+        </div>
+        <div>
+          {this.state.currentPlayerColor}'s Turn
+        </div>
+        <div>
+          {this.state.rowFull}
+        </div>
       </div>
     );
   }
