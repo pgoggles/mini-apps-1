@@ -39,7 +39,7 @@ class App extends React.Component {
 
   SubmitF2 () {
     console.log(this.state);
-    if (this.state.address1 === '' || this.state.city === '' || this.state.zipcode === '' || this.state.state === '') {
+    if (this.state.address1 === '' || this.state.city === '' || this.state.zipcode === '' || this.state.state === '' || this.state.phone === '') {
       this.setState({requiredShow: 'Please Fill in All Required Fields.'});
     } else {
       $.ajax({
@@ -55,7 +55,29 @@ class App extends React.Component {
           phone: this.state.phone
         },
         success: (data) => {
-          console.log(data);
+          this.setState({currentPage: 3, requiredShow: ''});
+        }
+      });
+    }
+  }
+  SubmitF3 () {
+    console.log(this.state);
+    if (this.state.creditcard === '' || this.state.expirydate === '' || this.state.cvv === '' || this.state.billingzip === '') {
+      this.setState({requiredShow: 'Please Fill in All Required Fields.'});
+    } else {
+      $.ajax({
+        type: 'POST',
+        url: '/form3',
+        data: {
+          id: this.state.ID,
+          ccnumber: this.state.creditcard,
+          expiry: this.state.expirydate,
+          cvv: this.state.cvv,
+          billingzip: this.state.billingzip
+        },
+        success: (data) => {
+          var parsedData = JSON.parse(data);
+          this.setState({currentPage: 4, requiredShow: '', postedData: parsedData});
         }
       });
     }
@@ -123,6 +145,46 @@ class App extends React.Component {
           <button id="SubmitF2" type="button" onClick={this.SubmitF2.bind(this)}>Next</button>
           <div class="required">{this.state.requiredShow}</div>
         </form>
+      );
+    } else if (this.state.currentPage === 3) {
+      return (
+        <form>
+          <div>
+            <label for="creditcard">Credit Card Number: (Required)  </label>
+            <input type="text" name="creditcard" id="creditcard" required onChange={this.handleChange.bind(this)}></input>
+          </div>
+          <div>
+            <label for="expirydate">Expiry Date (Required):  </label>
+            <input type="text" name="expirydate" id="expirydate"
+              required onChange={this.handleChange.bind(this)}></input>
+          </div>
+          <div>
+            <label for="cvv">CVV: (Required)  </label>
+            <input type="text" name="cvv" id="cvv"
+              required onChange={this.handleChange.bind(this)}></input>
+          </div>
+          <div>
+            <label for="billingzip">Billing Zip Code: (Required)  </label>
+            <input type="text" name="billingzip" id="billingzip"
+              required onChange={this.handleChange.bind(this)}></input>
+          </div>
+          <button id="SubmitF3" type="button" onClick={this.SubmitF3.bind(this)}>Submit</button>
+          <div class="required">{this.state.requiredShow}</div>
+        </form>
+      );
+    } else if (this.state.currentPage === 4) {
+      console.log(this.state);
+      return (
+        <div>
+          <p>Name: {this.state.postedData[0].name}</p>
+          <p>E-Mail Address: {this.state.postedData[0].email}</p>
+          <p>Address 1: {this.state.postedData[0].address1}</p>
+          <p>Address 2: {this.state.postedData[0].address2}</p>
+          <p>City: {this.state.postedData[0].city}</p>
+          <p>State: {this.state.postedData[0].state}</p>
+          <p>Zip Code: {this.state.postedData[0].zip}</p>
+          <p>Phone Number: {this.state.postedData[0].phone}</p>
+        </div>
       );
     }
   }

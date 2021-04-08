@@ -89,9 +89,11 @@ var App = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "SubmitF2",
     value: function SubmitF2() {
+      var _this3 = this;
+
       console.log(this.state);
 
-      if (this.state.address1 === '' || this.state.city === '' || this.state.zipcode === '' || this.state.state === '') {
+      if (this.state.address1 === '' || this.state.city === '' || this.state.zipcode === '' || this.state.state === '' || this.state.phone === '') {
         this.setState({
           requiredShow: 'Please Fill in All Required Fields.'
         });
@@ -109,7 +111,44 @@ var App = /*#__PURE__*/function (_React$Component) {
             phone: this.state.phone
           },
           success: function success(data) {
-            console.log(data);
+            _this3.setState({
+              currentPage: 3,
+              requiredShow: ''
+            });
+          }
+        });
+      }
+    }
+  }, {
+    key: "SubmitF3",
+    value: function SubmitF3() {
+      var _this4 = this;
+
+      console.log(this.state);
+
+      if (this.state.creditcard === '' || this.state.expirydate === '' || this.state.cvv === '' || this.state.billingzip === '') {
+        this.setState({
+          requiredShow: 'Please Fill in All Required Fields.'
+        });
+      } else {
+        $.ajax({
+          type: 'POST',
+          url: '/form3',
+          data: {
+            id: this.state.ID,
+            ccnumber: this.state.creditcard,
+            expiry: this.state.expirydate,
+            cvv: this.state.cvv,
+            billingzip: this.state.billingzip
+          },
+          success: function success(data) {
+            var parsedData = JSON.parse(data);
+
+            _this4.setState({
+              currentPage: 4,
+              requiredShow: '',
+              postedData: parsedData
+            });
           }
         });
       }
@@ -211,6 +250,49 @@ var App = /*#__PURE__*/function (_React$Component) {
         }, "Next"), /*#__PURE__*/React.createElement("div", {
           "class": "required"
         }, this.state.requiredShow));
+      } else if (this.state.currentPage === 3) {
+        return /*#__PURE__*/React.createElement("form", null, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+          "for": "creditcard"
+        }, "Credit Card Number: (Required)  "), /*#__PURE__*/React.createElement("input", {
+          type: "text",
+          name: "creditcard",
+          id: "creditcard",
+          required: true,
+          onChange: this.handleChange.bind(this)
+        })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+          "for": "expirydate"
+        }, "Expiry Date (Required):  "), /*#__PURE__*/React.createElement("input", {
+          type: "text",
+          name: "expirydate",
+          id: "expirydate",
+          required: true,
+          onChange: this.handleChange.bind(this)
+        })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+          "for": "cvv"
+        }, "CVV: (Required)  "), /*#__PURE__*/React.createElement("input", {
+          type: "text",
+          name: "cvv",
+          id: "cvv",
+          required: true,
+          onChange: this.handleChange.bind(this)
+        })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+          "for": "billingzip"
+        }, "Billing Zip Code: (Required)  "), /*#__PURE__*/React.createElement("input", {
+          type: "text",
+          name: "billingzip",
+          id: "billingzip",
+          required: true,
+          onChange: this.handleChange.bind(this)
+        })), /*#__PURE__*/React.createElement("button", {
+          id: "SubmitF3",
+          type: "button",
+          onClick: this.SubmitF3.bind(this)
+        }, "Submit"), /*#__PURE__*/React.createElement("div", {
+          "class": "required"
+        }, this.state.requiredShow));
+      } else if (this.state.currentPage === 4) {
+        console.log(this.state);
+        return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", null, "Name: ", this.state.postedData[0].name), /*#__PURE__*/React.createElement("p", null, "E-Mail Address: ", this.state.postedData[0].email), /*#__PURE__*/React.createElement("p", null, "Address 1: ", this.state.postedData[0].address1), /*#__PURE__*/React.createElement("p", null, "Address 2: ", this.state.postedData[0].address2), /*#__PURE__*/React.createElement("p", null, "City: ", this.state.postedData[0].city), /*#__PURE__*/React.createElement("p", null, "State: ", this.state.postedData[0].state), /*#__PURE__*/React.createElement("p", null, "Zip Code: ", this.state.postedData[0].zip), /*#__PURE__*/React.createElement("p", null, "Phone Number: ", this.state.postedData[0].phone));
       }
     }
   }]);
