@@ -1,10 +1,13 @@
+import MakeGrid from './MakeGrid.jsx';
 class App extends React.Component {
   constructor(props) {
     super(props);
   }
   render () {
     return (
-      <h1>Hello, World!</h1>
+      <div>
+        <MakeGrid n={7} />
+      </div>
     );
   }
 }
