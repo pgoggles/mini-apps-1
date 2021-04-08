@@ -40,7 +40,8 @@ var App = /*#__PURE__*/function (_React$Component) {
       name: '',
       email: '',
       password: '',
-      requiredShow: ''
+      requiredShow: '',
+      ID: null
     };
     return _this;
   }
@@ -60,6 +61,8 @@ var App = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "SubmitF1",
     value: function SubmitF1() {
+      var _this2 = this;
+
       if (this.state.name === '' || this.state.email === '' || this.state.password === '') {
         this.setState({
           requiredShow: 'Please Fill in All Required Fields.'
@@ -73,7 +76,41 @@ var App = /*#__PURE__*/function (_React$Component) {
             email: this.state.email,
             password: this.state.password
           },
-          success: console.log('Success')
+          success: function success(data) {
+            _this2.setState({
+              ID: data,
+              currentPage: 2,
+              requiredShow: ''
+            });
+          }
+        });
+      }
+    }
+  }, {
+    key: "SubmitF2",
+    value: function SubmitF2() {
+      console.log(this.state);
+
+      if (this.state.address1 === '' || this.state.city === '' || this.state.zipcode === '' || this.state.state === '') {
+        this.setState({
+          requiredShow: 'Please Fill in All Required Fields.'
+        });
+      } else {
+        $.ajax({
+          type: 'POST',
+          url: '/form2',
+          data: {
+            id: this.state.ID,
+            address1: this.state.address1,
+            address2: this.state.address2,
+            city: this.state.city,
+            state: this.state.state,
+            zipcode: this.state.zipcode,
+            phone: this.state.phone
+          },
+          success: function success(data) {
+            console.log(data);
+          }
         });
       }
     }
@@ -115,7 +152,63 @@ var App = /*#__PURE__*/function (_React$Component) {
           id: "SubmitF1",
           type: "button",
           onClick: this.SubmitF1.bind(this)
-        }, "Checkout"), /*#__PURE__*/React.createElement("div", {
+        }, "Next"), /*#__PURE__*/React.createElement("div", {
+          "class": "required"
+        }, this.state.requiredShow));
+      } else if (this.state.currentPage === 2) {
+        return /*#__PURE__*/React.createElement("form", null, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+          "for": "address1"
+        }, "Address Line 1: (Required)  "), /*#__PURE__*/React.createElement("input", {
+          type: "text",
+          name: "address1",
+          id: "address1",
+          required: true,
+          onChange: this.handleChange.bind(this)
+        })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+          "for": "address2"
+        }, "Address Line 2:  "), /*#__PURE__*/React.createElement("input", {
+          type: "text",
+          name: "address2",
+          id: "address2",
+          required: true,
+          onChange: this.handleChange.bind(this)
+        })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+          "for": "city"
+        }, "City: (Required)  "), /*#__PURE__*/React.createElement("input", {
+          type: "text",
+          name: "city",
+          id: "city",
+          required: true,
+          onChange: this.handleChange.bind(this)
+        })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+          "for": "state"
+        }, "State: (Required)  "), /*#__PURE__*/React.createElement("input", {
+          type: "text",
+          name: "state",
+          id: "state",
+          required: true,
+          onChange: this.handleChange.bind(this)
+        })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+          "for": "zipcode"
+        }, "Zip Code: (Required)  "), /*#__PURE__*/React.createElement("input", {
+          type: "text",
+          name: "zipcode",
+          id: "zipcode",
+          required: true,
+          onChange: this.handleChange.bind(this)
+        })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+          "for": "phone"
+        }, "Phone Number: (Required, Numbers Only)  "), /*#__PURE__*/React.createElement("input", {
+          type: "text",
+          name: "phone",
+          id: "phone",
+          required: true,
+          onChange: this.handleChange.bind(this)
+        })), /*#__PURE__*/React.createElement("button", {
+          id: "SubmitF2",
+          type: "button",
+          onClick: this.SubmitF2.bind(this)
+        }, "Next"), /*#__PURE__*/React.createElement("div", {
           "class": "required"
         }, this.state.requiredShow));
       }
